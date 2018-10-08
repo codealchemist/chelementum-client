@@ -24,11 +24,19 @@ const setData = (data = {}, store = true) => {
 
 me.login = params => {
   return axios
-    .post(`${API_URL}/rest/auth/login`, {
-      username: params.username,
-      company: params.company,
-      password: params.password
-    })
+    .post(
+      `${API_URL}/rest/auth/login`,
+      {
+        username: params.username,
+        company: params.company,
+        password: params.password
+      },
+      {
+        headers: {
+          withCredentials: true
+        }
+      }
+    )
     .then(({ data }) => {
       setData(data.result)
       return meData
