@@ -32,9 +32,7 @@ me.login = params => {
         password: params.password
       },
       {
-        headers: {
-          'Access-Control-Allow-Credentials': true
-        }
+        withCredentials: true
       }
     )
     .then(({ data }) => {
