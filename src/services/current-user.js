@@ -33,7 +33,7 @@ me.login = params => {
       },
       {
         headers: {
-          withCredentials: true
+          'Access-Control-Allow-Credentials': true
         }
       }
     )
