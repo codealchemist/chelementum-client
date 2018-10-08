@@ -44,7 +44,7 @@ me.login = params => {
 
 me.logout = () => {
   return axios
-    .delete('/rest/auth/logout')
+    .delete(`${API_URL}/rest/auth/logout`)
     .then(() => {
       setData(cloneDeep(USER))
       return meData
