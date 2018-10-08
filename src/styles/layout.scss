@@ -1,0 +1,41 @@
+body {
+  background: #eee;
+  min-width: 440px;
+	font-family: 'Raleway', sans-serif;
+}
+
+.app-section {
+  padding: 2rem 0;
+}
+
+.form-group, p, h1, h2, h3, h4 {
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.is-loading {
+	position: relative;
+	min-height: 80px;
+	min-width: 80px;
+
+	&:after {
+		content: " ";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(255, 255, 255, .5);
+	}
+
+	&:before {
+		position: absolute;
+		width: 64px;
+		height: 64px;
+		top: calc(50% - 64px / 2);
+		left: calc(50% - 64px / 2);
+		content: url('./images/is-loading.gif');
+		box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.5);
+	}
+}

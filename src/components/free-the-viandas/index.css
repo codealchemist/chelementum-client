@@ -1,0 +1,31 @@
+.ftv-container {
+  margin-top: 25px;
+}
+
+.card {
+  width: 100%;
+}
+
+.img-container {
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+p.spacer {
+  margin: 25px;
+}
+
+.icon-container {
+  display: flex;
+}
+
+.icon-container i {
+  padding-top: 2px;
+}
+
+.gray {
+  color: #999;
+}

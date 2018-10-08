@@ -1,0 +1,10 @@
+.month-selector {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 15px;
+}
+
+.btn-icon {
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+.food-container {
+  & .food-image {
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  & .food-container {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+  }
+}

@@ -1,0 +1,22 @@
+.home-page {
+  & .sub-header {
+    position: relative;
+    height: 30px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 30px;
+    color: #545454;
+  }
+
+  & .username {
+    position: absolute;
+    right: 30px;
+  }
+
+  & .username span {
+    vertical-align: top;
+  }
+
+  & .dessert {
+    color: #1C9EBD;
+  }
+}

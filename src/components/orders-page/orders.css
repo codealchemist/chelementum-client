@@ -1,0 +1,11 @@
+.container-fluid {
+  position: relative;
+}
+
+.app-section {
+  padding: 1rem 0;
+}
+
+.orders {
+  overflow: auto;
+}
