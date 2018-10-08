@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { isEqual } from 'lodash';
-import moment from 'moment';
+import React, { Component } from 'react'
+import { isEqual } from 'lodash'
+import moment from 'moment'
 
-import './styles.scss';
+import './styles.scss'
 
-import { ordersSvc } from '../../../services';
-import { TODAY } from '../../../services/constants';
+import { ordersSvc } from 'services'
+import { TODAY } from 'services/constants'
 
 const OrderDay = ({ order }) => {
-  const me = new Component();
-  let orderInitData = {};
-  const orderModel = ordersSvc.buildEntity(undefined, order);
-  const cancellations = [];
-  let cancelPromise = () => {};
+  const me = new Component()
+  let orderInitData = {}
+  const orderModel = ordersSvc.buildEntity(undefined, order)
+  const cancellations = []
+  let cancelPromise = () => {}
 
   me.state = {
     order: orderModel.getState(),
@@ -20,7 +20,7 @@ const OrderDay = ({ order }) => {
       isLoading: false,
       results: []
     }
-  };
+  }
 
   const loadMenu = () => {
     me.setState({
@@ -28,22 +28,22 @@ const OrderDay = ({ order }) => {
         isLoading: true,
         results: me.state.options.results
       }
-    });
+    })
 
     const promise = ordersSvc.getMenu({
       date: order.date,
       menuId: order.menu_id
-    });
+    })
 
-    cancellations.push(promise.cancel);
+    cancellations.push(promise.cancel)
 
     promise.then(({ foods }) => {
       orderModel.setData({
         plato_principal_id: (foods.plato_principal_id.find(food => food.food_name === order.plato_principal) || {}).food_id || '',
         postre_id: (foods.postre_id.find(food => food.food_name === order.postre) || {}).food_id || '',
-      });
+      })
 
-      orderInitData = { ...orderModel.getState().data };
+      orderInitData = { ...orderModel.getState().data }
 
       me.setState({
         order: orderModel.getState(),
@@ -51,76 +51,76 @@ const OrderDay = ({ order }) => {
           isLoading: false,
           results: foods
         }
-      });
-    });
-  };
+      })
+    })
+  }
 
   const saveOrder = () => {
     orderModel.save()
       .then(() => {
-        orderInitData = { ...orderModel.getState().data };
+        orderInitData = { ...orderModel.getState().data }
       })
       .catch((error) => {
-        alert(error);
+        alert(error)
       }).then(() => {
-        me.setState({ order: orderModel.getState() });
-      });
+        me.setState({ order: orderModel.getState() })
+      })
 
-    me.setState({ order: orderModel.getState() });
-  };
+    me.setState({ order: orderModel.getState() })
+  }
 
   const resetOrder = () => {
-    orderModel.setData(orderInitData);
+    orderModel.setData(orderInitData)
     me.setState({
       order: orderModel.getState()
-    });
-  };
+    })
+  }
 
   const changeField = (event, target = event.target) => {
     orderModel.setData({
       [target.name]: target.value
-    });
+    })
 
     me.setState({
       order: orderModel.getState()
-    });
-  };
+    })
+  }
 
   const getAttrs = () => {
-    const classes = ['day', order.status, 'p-3', 'rounded', moment(order.date).format('ddd').toLowerCase()];
+    const classes = ['day', order.status, 'p-3', 'rounded', moment(order.date).format('ddd').toLowerCase()]
 
     if (order.date.getTime() === TODAY().getTime()) {
-      classes.push('current');
+      classes.push('current')
     }
     if (me.state.options.isLoading || me.state.order.isLoading) {
-      classes.push('is-loading');
+      classes.push('is-loading')
     }
     return {
       className: classes.join(' ')
-    };
-  };
+    }
+  }
 
-  const isEditable = () => ['queued', 'standby'].includes(order.status);
+  const isEditable = () => ['queued', 'standby'].includes(order.status)
 
   const getOptions = (category) => {
-    return me.state.options.results[category] || [];
-  };
+    return me.state.options.results[category] || []
+  }
 
   const allowSave = () => {
-    return !me.state.order.isLoading && !isEqual(orderInitData, me.state.order.data);
+    return !me.state.order.isLoading && !isEqual(orderInitData, me.state.order.data)
   }
 
   me.componentDidMount = () => {
     if (order.menu_id && isEditable()) {
-      loadMenu();
+      loadMenu()
     }
-  };
+  }
 
   me.componentWillUnmount = () => {
     cancellations.forEach(cancel => {
-      cancel();
-    });
-  };
+      cancel()
+    })
+  }
 
   me.render = () => {
     if (!order.enabled) {
@@ -128,7 +128,7 @@ const OrderDay = ({ order }) => {
         <div { ...getAttrs() }>
           <h4>{ moment(order.date).format('MMM DD') }</h4>
         </div>
-      );
+      )
     }
 
     return (
@@ -136,12 +136,12 @@ const OrderDay = ({ order }) => {
         <h4>{ moment(order.date).format('MMM DD') }</h4>
         <form
           onSubmit={ (e) => {
-            e.preventDefault();
-            saveOrder();
+            e.preventDefault()
+            saveOrder()
           }}
           onReset={ (e) => {
-            e.preventDefault();
-            resetOrder();
+            e.preventDefault()
+            resetOrder()
           }}
         >
           {isEditable() || order.plato_principal ? (
@@ -191,10 +191,10 @@ const OrderDay = ({ order }) => {
 
         </form>
       </div>
-    );
-  };
+    )
+  }
 
-  return me;
+  return me
 }
 
-export default OrderDay;
+export default OrderDay

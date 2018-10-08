@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { clone } from 'lodash';
+import React, { Component } from 'react'
+import { clone } from 'lodash'
 
-import { currentUserSvc } from '../../services';
-import './index.css';
+import { currentUserSvc } from 'services'
+import './index.css'
 
 const Login = ({
   onSuccess = () => {}
 }) => {
-  const me = new Component();
+  const me = new Component()
 
   me.state = {
     data: {
@@ -16,33 +16,33 @@ const Login = ({
       password: ''
     },
     isLoading: false
-  };
+  }
 
   const changeField = (event, target = event.target) => {
     me.setState({
       data: Object.assign(clone(me.state.data), {
         [target.name]: target.value
       })
-    });
-  };
+    })
+  }
 
   const submit = () => {
-    me.setState({ isLoading: true });
+    me.setState({ isLoading: true })
 
     currentUserSvc.login(me.state.data)
     .then(onSuccess)
     .catch(msg => {
-      alert(msg);
+      alert(msg)
     }).then(() => {
-      me.setState({ isLoading: false });
-    });
-  };
+      me.setState({ isLoading: false })
+    })
+  }
 
 
   me.render = () => (
     <div className="container">
       <form onSubmit={(e) => {
-        e.preventDefault();
+        e.preventDefault()
         submit()
       }} className="form-signin">
 
@@ -66,9 +66,9 @@ const Login = ({
 
       </form>
     </div>
-  );
+  )
 
-  return me;
+  return me
 }
 
-export default Login;
+export default Login

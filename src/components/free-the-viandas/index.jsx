@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import TimerIcon from 'rmdi/lib/Timer';
-import freeTheViandasService from '../../services/free-the-viandas';
-import './index.css';
-import PowerFist from './powerfist.png';
+import React, { Component } from 'react'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import TimerIcon from 'rmdi/lib/Timer'
+import freeTheViandasService from 'services/free-the-viandas'
+import './index.css'
+import PowerFist from './powerfist.png'
 
 const FreeTheViandas = ({ user }) => {
-  const me = new Component();
+  const me = new Component()
   me.state = {
     isFreeVianda: false,
     isLoading: true,
     isSaving: false
-  };
+  }
 
   me.getSaveButton = () => {
     if (!me.state.isSaving) {
@@ -22,7 +22,7 @@ const FreeTheViandas = ({ user }) => {
         <Button size="small" color="primary" onClick={me.free}>
           Yeah! Free my vianda!
         </Button>
-      );
+      )
     }
 
     // Saving...
@@ -31,8 +31,8 @@ const FreeTheViandas = ({ user }) => {
         <TimerIcon />
         <i>Saving...</i>
       </div>
-    );
-  };
+    )
+  }
 
   // Load user data.
   freeTheViandasService.get()
@@ -40,25 +40,25 @@ const FreeTheViandas = ({ user }) => {
     me.setState({
       isLoading: false,
       isFreeVianda: !!res.data
-    });
-  });
+    })
+  })
 
   me.free = () => {
-    me.setState({ isSaving: true });
+    me.setState({ isSaving: true })
     freeTheViandasService.set(user)
     .then((res) => {
       if (!res.data.ok) {
-        alert('Oops! Something went wrong.');
-        me.setState({ isSaving: false });
-        return;
+        alert('Oops! Something went wrong.')
+        me.setState({ isSaving: false })
+        return
       }
 
       me.setState({
         isSaving: false,
         isFreeVianda: true
-      });
-    });
-  };
+      })
+    })
+  }
 
   const makeItFreeView = (
     <div className="ftv-container">
@@ -96,27 +96,27 @@ const FreeTheViandas = ({ user }) => {
         </CardActions>
       </Card>
     </div>
-  );
+  )
 
   const alreadyFreeView = (
     <div className="ftv-container">
       Thanks! You're <em>vianda</em> is already free! 🤘
     </div>
-  );
+  )
 
   const loadingView = (
     <div className="ftv-container">
       I wonder... Is your <em>vianda</em> free?
     </div>
-  );
+  )
 
   me.render = () => {
-    if (me.state.isLoading) return loadingView;
-    if (me.state.isFreeVianda) return alreadyFreeView;
-    return makeItFreeView;
-  };
+    if (me.state.isLoading) return loadingView
+    if (me.state.isFreeVianda) return alreadyFreeView
+    return makeItFreeView
+  }
 
-  return me;
-};
+  return me
+}
 
-export default FreeTheViandas;
+export default FreeTheViandas

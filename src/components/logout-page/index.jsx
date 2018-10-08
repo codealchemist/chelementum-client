@@ -1,5 +1,5 @@
-import React from 'react';
-import { currentUserSvc } from '../../services';
+import React from 'react'
+import { currentUserSvc } from 'services'
 
 const Logout = ({
   onSuccess = () => {},
@@ -7,14 +7,14 @@ const Logout = ({
 }) => {
   const confirm = () => {
     currentUserSvc.logout().then((userData) => {
-      onSuccess(userData);
+      onSuccess(userData)
     })
-  };
+  }
 
   return (
     <div className="container">
       <form onSubmit={(e) => {
-        e.preventDefault();
+        e.preventDefault()
         confirm()
       }} className="form-signin">
         <h2 className="form-signin-heading">Logout</h2>
@@ -22,8 +22,7 @@ const Logout = ({
         <button type="submit" className="btn btn-primary" onClick={ confirm }>Yes</button> <button type="button" className="btn btn-secondary" onClick={ onCancel }>No</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-
-export default Logout;
+export default Logout

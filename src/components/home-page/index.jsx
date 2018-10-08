@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { currentUserSvc } from '../../services';
-import { ordersSvc } from '../../services';
-import FoodImage from '../food-image';
-import FreeTheViandas from '../free-the-viandas';
-import moment from 'moment';
-import PersonIcon from 'rmdi/lib/Person';
-import './index.css';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { currentUserSvc } from 'services'
+import { ordersSvc } from 'services'
+import FoodImage from 'components/food-image'
+import FreeTheViandas from 'components/free-the-viandas'
+import moment from 'moment'
+import PersonIcon from 'rmdi/lib/Person'
+import './index.css'
 
 const Home = () => {
-  const me = new Component();
+  const me = new Component()
 
   me.state = {
     currentUser: currentUserSvc.get(),
@@ -22,8 +22,8 @@ const Home = () => {
       me.setState({
         todaysOrder: data.results[0],
         isLoading: false
-      });
-    });
+      })
+    })
   }
 
   me.render = () => (
@@ -94,9 +94,9 @@ const Home = () => {
         </p>
       )}
     </div>
-  );
+  )
 
-  return me;
-};
+  return me
+}
 
-export default Home;
+export default Home

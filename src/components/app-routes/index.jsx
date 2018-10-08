@@ -1,44 +1,43 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { get } from 'lodash';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { get } from 'lodash'
 
-import UnauthorizedPage from '../unauthorized-page';
-import NotFoundPage from '../not-found-page';
-
+import UnauthorizedPage from 'components/unauthorized-page'
+import NotFoundPage from 'components/not-found-page'
 
 const AppRoutes = ({ routes, permissions, onLogin, onLogout }) => {
   const getComponent = (route) => {
-    let component = get(route, 'props.component');
+    let component = get(route, 'props.component')
 
     if (component && !permissions.includes(route.name)) {
       component = UnauthorizedPage
     }
 
     if (!component) {
-      return NotFoundPage;
+      return NotFoundPage
     }
 
     if (route.name === 'login') {
       return ({ history }) => component({
         onSuccess: () => {
-          onLogin();
-          history.replace('/');
+          onLogin()
+          history.replace('/')
         }
-      });
+      })
     } else if (route.name === 'logout') {
       return ({ history }) => component({
         onSuccess: () => {
-          onLogout();
-          history.replace('/');
+          onLogout()
+          history.replace('/')
         },
         onCancel: () => {
-          history.goBack();
+          history.goBack()
         }
-      });
+      })
     }
 
-    return component;
-  };
+    return component
+  }
 
   return (
     <Switch>
@@ -52,7 +51,7 @@ const AppRoutes = ({ routes, permissions, onLogin, onLogout }) => {
       ))}
       <Route component={ NotFoundPage }/>
     </Switch>
-  );
-};
+  )
+}
 
-export default AppRoutes;
+export default AppRoutes

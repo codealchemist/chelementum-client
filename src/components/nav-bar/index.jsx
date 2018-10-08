@@ -1,15 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { intersection } from 'lodash';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import './styles.css';
-import chelementum from './chelementum.jpg';
-import { currentUserSvc } from '../../services';
+import './styles.css'
+import chelementum from './chelementum.jpg'
 
 const NavBar = ({ routes, permissions, currentPath }) => {
   const allowedRoutes = routes.filter(route =>
     permissions.includes(route.name)
-  );
+  )
 
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -27,7 +25,7 @@ const NavBar = ({ routes, permissions, currentPath }) => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar
