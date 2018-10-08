@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
@@ -109,5 +110,16 @@ if (BUILD_MODE === 'DEV') {
 if (BUILD_MODE === 'PROD') {
   webpackConfig.plugins.push(new UglifyJSPlugin())
 }
+
+// Add environmental vars.
+const envVars = ['API_URL']
+const envObject = {}
+envVars.map(key => {
+  const value = process.env[key]
+  envObject[`process.env.${key}`] = JSON.stringify(value || '')
+})
+console.log('ENV VARS', envObject)
+const envPlugin = new webpack.DefinePlugin(envObject)
+webpackConfig.plugins.push(envPlugin)
 
 module.exports = webpackConfig

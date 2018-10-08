@@ -1,10 +1,10 @@
 const me = {
   set (key, value) {
-    return localStorage.setItem(key, JSON.stringify(value));
+    return localStorage.setItem(key, JSON.stringify(value))
   },
   get (key) {
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key))
   }
-};
+}
 
-export default me;
+export default me
