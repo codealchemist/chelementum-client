@@ -5,12 +5,14 @@
   "scripts": {
     "start": "BUILD_MODE=DEV webpack-dev-server --progress --colors",
     "build-dev": "BUILD_MODE=DEV webpack --progress --colors",
-    "build-prod": "BUILD_MODE=PROD webpack --progress --colors"
+    "build-prod": "BUILD_MODE=PROD webpack --progress --colors",
+    "prod": "npm run build-prod; http-server build/prod"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.2",
     "axios": "^0.16.2",
     "history": "^4.7.2",
+    "http-server": "^0.11.1",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "react": "^16.5.2",
