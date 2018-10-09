@@ -11,13 +11,11 @@ const USER = {
   permissions: ['home', 'login', 'about']
 }
 
+axios.defaults.withCredentials = true
 const req = axios.create({
   baseURL: API_URL,
   timeout: 4000,
-  withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Credentials': true
-  }
+  withCredentials: true
 })
 const me = {}
 let meData = {}
