@@ -34,6 +34,11 @@ const ROUTES = [
     path: '/change-password'
   },
   {
+    name: 'free-the-viandas',
+    text: 'Free The Viandas!',
+    path: '/free-the-viandas'
+  },
+  {
     name: 'logout',
     text: 'Logout',
     path: '/logout',
