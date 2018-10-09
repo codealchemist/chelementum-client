@@ -1,4 +1,4 @@
-# chelementum changelog
+# chelementum-client changelog
 
 ## v1.0.0
 
@@ -9,6 +9,7 @@
 - Env vars passed to React app.
 - API_URL, with env support.
 - Free The Viandas! opt in component.
+- Styled components.
 
 ### Removed
 

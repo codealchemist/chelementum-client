@@ -1,5 +1,13 @@
 import React from 'react'
 import { currentUserSvc } from 'services'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  button {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+`
 
 const Logout = ({
   onSuccess = () => {},
@@ -12,7 +20,7 @@ const Logout = ({
   }
 
   return (
-    <div className="container">
+    <Container>
       <form onSubmit={(e) => {
         e.preventDefault()
         confirm()
@@ -22,7 +30,7 @@ const Logout = ({
         <button type="submit" className="btn btn-primary" onClick={ confirm }>Yes</button>
         <button type="button" className="btn btn-secondary" onClick={ onCancel }>No</button>
       </form>
-    </div>
+    </Container>
   )
 }
 
