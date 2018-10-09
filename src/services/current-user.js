@@ -14,7 +14,10 @@ const USER = {
 const req = axios.create({
   baseURL: API_URL,
   timeout: 4000,
-  withCredentials: true
+  withCredentials: true,
+  headers: {
+    'Access-Control-Allow-Credentials': true
+  }
 })
 const me = {}
 let meData = {}
