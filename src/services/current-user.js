@@ -11,6 +11,11 @@ const USER = {
   permissions: ['home', 'login', 'about']
 }
 
+const req = axios.create({
+  baseURL: API_URL,
+  timeout: 4000,
+  withCredentials: true
+})
 const me = {}
 let meData = {}
 
@@ -23,16 +28,13 @@ const setData = (data = {}, store = true) => {
 }
 
 me.login = params => {
-  return axios
+  return req
     .post(
-      `${API_URL}/rest/auth/login`,
+      '/rest/auth/login',
       {
         username: params.username,
         company: params.company,
         password: params.password
-      },
-      {
-        withCredentials: true
       }
     )
     .then(({ data }) => {
@@ -49,8 +51,8 @@ me.login = params => {
 }
 
 me.logout = () => {
-  return axios
-    .delete(`${API_URL}/rest/auth/logout`)
+  return req
+    .delete('/rest/auth/logout')
     .then(() => {
       setData(cloneDeep(USER))
       return meData
