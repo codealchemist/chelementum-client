@@ -4,6 +4,7 @@
 
 ### Added
 
+- Axios withCredentials as default to allow auth with cookies on different domain.
 - rmdi: React Material Design Icons.
 - Env vars passed to React app.
 - API_URL, with env support.

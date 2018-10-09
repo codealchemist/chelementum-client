@@ -11,11 +11,12 @@ const USER = {
   permissions: ['home', 'login', 'about']
 }
 
+// Required to allow auth with cookies against another domain.
 axios.defaults.withCredentials = true
+
 const req = axios.create({
   baseURL: API_URL,
-  timeout: 4000,
-  withCredentials: true
+  timeout: 4000
 })
 const me = {}
 let meData = {}
