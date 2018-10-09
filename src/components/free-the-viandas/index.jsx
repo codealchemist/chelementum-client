@@ -4,7 +4,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import TimerIcon from 'rmdi/lib/Timer'
-import freeTheViandasService from 'services/free-the-viandas'
+import { freeTheViandasSvc } from 'services'
 import './index.css'
 import PowerFist from './powerfist.png'
 
@@ -19,7 +19,7 @@ const FreeTheViandas = ({ user }) => {
   me.getSaveButton = () => {
     if (!me.state.isSaving) {
       return (
-        <Button size="small" color="primary" onClick={me.free}>
+        <Button size="small" color="primary" variant="outlined" onClick={me.free}>
           Yeah! Free my vianda!
         </Button>
       )
@@ -35,7 +35,7 @@ const FreeTheViandas = ({ user }) => {
   }
 
   // Load user data.
-  freeTheViandasService.get()
+  freeTheViandasSvc.get()
   .then((res) => {
     me.setState({
       isLoading: false,
@@ -45,7 +45,7 @@ const FreeTheViandas = ({ user }) => {
 
   me.free = () => {
     me.setState({ isSaving: true })
-    freeTheViandasService.set(user)
+    freeTheViandasSvc.set(user)
     .then((res) => {
       if (!res.data.ok) {
         alert('Oops! Something went wrong.')
@@ -56,6 +56,23 @@ const FreeTheViandas = ({ user }) => {
       me.setState({
         isSaving: false,
         isFreeVianda: true
+      })
+    })
+  }
+
+  me.unfree = () => {
+    me.setState({ isSaving: true })
+    freeTheViandasSvc.remove(user)
+    .then((res) => {
+      if (!res.data.ok) {
+        alert('Oops! Something went wrong.')
+        me.setState({ isSaving: false })
+        return
+      }
+
+      me.setState({
+        isSaving: false,
+        isFreeVianda: false
       })
     })
   }
@@ -89,6 +106,11 @@ const FreeTheViandas = ({ user }) => {
             🙌 If you choose to free your <em>vianda</em> you're name will appear on the <b>Free The Viandas!</b> page
             and you'll walk the office with pride!
           </p>
+
+          <p className="spacer"></p>
+          <p>
+            🙂 If you free it now you can change your mind later, no worries.
+          </p>
         </CardContent>
 
         <CardActions>
@@ -99,8 +121,27 @@ const FreeTheViandas = ({ user }) => {
   )
 
   const alreadyFreeView = (
-    <div className="ftv-container">
-      Thanks! You're <em>vianda</em> is already free! 🤘
+    <div>
+      <div className="ftv-container">
+        Thanks! You're <em>vianda</em> is already free! 🤘
+      </div>
+
+      {
+        me.state.saving && (
+          <div className="icon-container gray">
+            <TimerIcon />
+            <i>Saving...</i>
+          </div>
+        )
+      }
+
+      {
+        !me.state.saving && (
+          <Button size="small" href="#unfree" color="secondary" variant="outlined" onClick={me.unfree}>
+            Unfree
+          </Button>
+        )
+      }
     </div>
   )
 

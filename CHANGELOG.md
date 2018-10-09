@@ -1,5 +1,13 @@
 # chelementum-client changelog
 
+## v1.1.0
+
+### Added
+
+- Unfree functionality.
+- Test script, runs linter.
+- Free The Viandas! list.
+
 ## v1.0.0
 
 ### Added

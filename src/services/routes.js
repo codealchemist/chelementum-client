@@ -1,5 +1,5 @@
 import { find } from 'lodash'
-import { HomePage, LoginPage, LogoutPage, OrdersPage } from 'components'
+import { HomePage, LoginPage, LogoutPage, OrdersPage, FreeTheViandasPage } from 'components'
 
 const me = {}
 const ROUTES = [
@@ -36,7 +36,10 @@ const ROUTES = [
   {
     name: 'free-the-viandas',
     text: 'Free The Viandas!',
-    path: '/free-the-viandas'
+    path: '/free-the-viandas',
+    props: {
+      component: FreeTheViandasPage
+    }
   },
   {
     name: 'logout',

@@ -6,7 +6,8 @@
     "start": "BUILD_MODE=DEV webpack-dev-server --progress --colors",
     "build-dev": "BUILD_MODE=DEV webpack --progress --colors",
     "build-prod": "API_URL=https://chelementum-server.herokuapp.com BUILD_MODE=PROD webpack --progress --colors",
-    "prod": "http-server build/prod"
+    "prod": "http-server build/prod",
+    "test": "standard"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.2",
