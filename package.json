@@ -1,6 +1,6 @@
 {
   "name": "chelementum-client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "start": "BUILD_MODE=DEV webpack-dev-server --progress --colors",
