@@ -8,6 +8,10 @@
 - Test script, runs linter.
 - Free The Viandas! list.
 
+### Removed
+
+- @material-ui/core
+
 ## v1.0.0
 
 ### Added

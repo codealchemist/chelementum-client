@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
+import styled from 'styled-components'
 import TimerIcon from 'rmdi/lib/Timer'
 import { freeTheViandasSvc } from 'services'
 import './index.css'
 import PowerFist from './powerfist.png'
+
+const Container = styled.div`
+  margin-top: 25px;
+  button {
+    cursor: pointer;
+  }
+
+  .card button {
+    margin: 20px;
+  }
+`
 
 const FreeTheViandas = ({ user }) => {
   const me = new Component()
@@ -19,9 +27,9 @@ const FreeTheViandas = ({ user }) => {
   me.getSaveButton = () => {
     if (!me.state.isSaving) {
       return (
-        <Button size="small" color="primary" variant="outlined" onClick={me.free}>
+        <button className="btn btn-primary" onClick={me.free}>
           Yeah! Free my vianda!
-        </Button>
+        </button>
       )
     }
 
@@ -36,51 +44,51 @@ const FreeTheViandas = ({ user }) => {
 
   // Load user data.
   freeTheViandasSvc.get()
-  .then((res) => {
-    me.setState({
-      isLoading: false,
-      isFreeVianda: !!res.data
+    .then((res) => {
+      me.setState({
+        isLoading: false,
+        isFreeVianda: !!res.data
+      })
     })
-  })
 
   me.free = () => {
     me.setState({ isSaving: true })
     freeTheViandasSvc.set(user)
-    .then((res) => {
-      if (!res.data.ok) {
-        alert('Oops! Something went wrong.')
-        me.setState({ isSaving: false })
-        return
-      }
+      .then((res) => {
+        if (!res.data.ok) {
+          alert('Oops! Something went wrong.')
+          me.setState({ isSaving: false })
+          return
+        }
 
-      me.setState({
-        isSaving: false,
-        isFreeVianda: true
+        me.setState({
+          isSaving: false,
+          isFreeVianda: true
+        })
       })
-    })
   }
 
   me.unfree = () => {
     me.setState({ isSaving: true })
     freeTheViandasSvc.remove(user)
-    .then((res) => {
-      if (!res.data.ok) {
-        alert('Oops! Something went wrong.')
-        me.setState({ isSaving: false })
-        return
-      }
+      .then((res) => {
+        if (!res.data.ok) {
+          alert('Oops! Something went wrong.')
+          me.setState({ isSaving: false })
+          return
+        }
 
-      me.setState({
-        isSaving: false,
-        isFreeVianda: false
+        me.setState({
+          isSaving: false,
+          isFreeVianda: false
+        })
       })
-    })
   }
 
   const makeItFreeView = (
-    <div className="ftv-container">
-      <Card className="card">
-        <CardContent>
+    <Container>
+      <div className="card">
+        <div className="card-body">
           <div className="img-container">
             <img src={PowerFist} />
           </div>
@@ -111,18 +119,18 @@ const FreeTheViandas = ({ user }) => {
           <p>
             🙂 If you free it now you can change your mind later, no worries.
           </p>
-        </CardContent>
+        </div>
 
-        <CardActions>
+        <div>
           { me.getSaveButton() }
-        </CardActions>
-      </Card>
-    </div>
+        </div>
+      </div>
+    </Container>
   )
 
   const alreadyFreeView = (
-    <div>
-      <div className="ftv-container">
+    <Container>
+      <div>
         Thanks! You're <em>vianda</em> is already free! 🤘
       </div>
 
@@ -137,12 +145,12 @@ const FreeTheViandas = ({ user }) => {
 
       {
         !me.state.saving && (
-          <Button size="small" href="#unfree" color="secondary" variant="outlined" onClick={me.unfree}>
+          <button className="btn btn-sm btn-danger" onClick={me.unfree}>
             Unfree
-          </Button>
+          </button>
         )
       }
-    </div>
+    </Container>
   )
 
   const loadingView = (
